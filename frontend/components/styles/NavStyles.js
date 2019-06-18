@@ -6,8 +6,7 @@ const NavStyles = styled.ul`
   display: flex;
   justify-self: end;
   font-size: 2rem;
-  a,
-  button {
+  a, button {
     padding: 1rem 3rem;
     display: flex;
     align-items: center;
@@ -22,6 +21,7 @@ const NavStyles = styled.ul`
       font-size: 10px;
       padding: 0 10px;
     }
+    /* same as a::before, button::before  */
     &:before {
       content: '';
       width: 2px;
@@ -33,27 +33,30 @@ const NavStyles = styled.ul`
       top: 0;
       bottom: 0;
     }
-    &:after {
-      height: 2px;
-      background: red;
-      content: '';
-      width: 0;
-      position: absolute;
-      transform: translateX(-50%);
-      transition: width 0.4s;
-      transition-timing-function: cubic-bezier(1, -0.65, 0, 2.31);
-      left: 50%;
-      margin-top: 2rem;
-    }
-    &:hover,
-    &:focus {
-      outline: none;
+
+    /* red nav animation */
+    @media (min-width: 700px) {
       &:after {
-        width: calc(100% - 60px);
+        height: 2px;
+        background: red;
+        content: '';
+        width: 0;
+        position: absolute;
+        transform: translateX(-50%);
+        transition: width 0.4s;
+        transition-timing-function: cubic-bezier(1, -0.65, 0, 2.31);
+        left: 50%;
+        margin-top: 2rem;
       }
-    @media (max-width: 700px) {
-        width: calc(100% - 10px);
+      &:hover, &:focus {
+        outline: none;
+        &:after {
+          width: calc(100% - 60px);
+        }
+      }
     }
+    @media (max-width: 700px) {
+      width: calc(100% - 10px);
     }
   }
   @media (max-width: 1300px) {
@@ -62,6 +65,7 @@ const NavStyles = styled.ul`
     justify-content: center;
     font-size: 1.5rem;
   }
-`;
+
+`
 
 export default NavStyles;
